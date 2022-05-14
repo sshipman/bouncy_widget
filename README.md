@@ -2,6 +2,8 @@ bouncy_widget is a simple animated bouncing widget.  It encapsulates the animati
 necessary to create a widget that rises, then falls, bounces, and then optionally waits, before
 starting all over.
 
+<img src="https://raw.githubusercontent.com/sshipman/bouncy_widget/master/example/bounce_widget.gif">
+
 ## Features
 
 * Configure the ratio of up/down/pause phases
