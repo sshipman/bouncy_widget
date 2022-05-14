@@ -55,18 +55,26 @@ class _BouncyDemoState extends State<BouncyDemo> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Center(
-          child: Container(
-            width: 50,
-            height: 200,
-            child: Bouncy(
-                duration: Duration(milliseconds: 2000),
-                lift: 50,
-                ratio: 0.5,
-                pause: 0.5,
-                child: const Icon(Icons.new_releases_outlined,
-                    color: Colors.blue, size: 50)),
-          ),
-        ));
+        body: ElevatedButton.icon(
+            icon: Padding(
+              // This padding gives the bouncing icon vertical room to move into.
+              // Without it, the icon will be clipped.
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: Bouncy(
+                  // height and width match the default icon size
+                  height: 24,
+                  width: 24,
+                  // the bounce animation takes 2 seconds total
+                  duration: Duration(seconds: 2),
+                  // go up by 10 before dropping
+                  lift: 10,
+                  // 25% of the non-pause cycle is lift, the rest is drop
+                  ratio: 0.25,
+                  // half of the total cycle is motionless
+                  pause: 0.5,
+                  child: const Icon(Icons.new_releases_outlined)),
+            ),
+            label: const Text("It's bouncy!"),
+            onPressed: () {}));
   }
 }
