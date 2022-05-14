@@ -22,7 +22,8 @@ class Bouncy extends StatefulWidget {
       required this.lift,
       this.pause = 0,
       this.ratio = 0.25,
-      required this.child});
+      required this.child,
+      super.key});
 
   @override
   _BouncyState createState() => _BouncyState();
@@ -59,14 +60,13 @@ class _BouncyAnimation extends StatelessWidget {
   final double pause;
   final Widget child;
 
-  _BouncyAnimation(
-      {required this.controller,
-      required this.lift,
-      required this.pause,
-      required this.ratio,
-      required this.child,
-      super.key})
-      : upPhase = Tween<double>(begin: 0.0, end: lift).animate(CurvedAnimation(
+  _BouncyAnimation({
+    required this.controller,
+    required this.lift,
+    required this.pause,
+    required this.ratio,
+    required this.child,
+  })  : upPhase = Tween<double>(begin: 0.0, end: lift).animate(CurvedAnimation(
             parent: controller, curve: Interval(0.0, ratio * (1 - pause)))),
         downPhase = Tween<double>(begin: lift, end: 0).animate(CurvedAnimation(
             parent: controller,
@@ -76,9 +76,18 @@ class _BouncyAnimation extends StatelessWidget {
             CurvedAnimation(parent: controller, curve: Interval(1 - pause, 1)));
 
   Widget _buildAnimation(BuildContext context, Widget? child) {
-    return Padding(
-        padding: EdgeInsets.only(bottom: upPhase.value + downPhase.value),
-        child: child);
+    Animation<double> phase = pausePhase;
+    if (controller.value >= 0 && controller.value < (ratio * (1 - pause))) {
+      phase = upPhase;
+    }
+    if (controller.value >= (ratio * (1 - pause)) &&
+        (controller.value < (1 - pause))) {
+      phase = downPhase;
+    }
+    return Stack(children: [
+      Positioned(bottom: phase.value, child: child ?? const SizedBox())
+    ]);
+    //Padding(padding: EdgeInsets.only(bottom: phase.value), child: child);
   }
 
   @override
