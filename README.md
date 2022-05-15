@@ -15,9 +15,10 @@ starting all over.
 ```dart
 Bouncy(
     duration: Duration(milliseconds: 2000),
+    width: 24,
+    height: 24,
     lift: 50,
     ratio: 0.5,
     pause: 0.5,
-    child: const Icon(Icons.new_releases_outlined,
-        color: Colors.blue, size: 50));
+    child: const Icon(Icons.new_releases_outlined));
 ```
