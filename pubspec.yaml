@@ -1,6 +1,6 @@
 name: bouncy_widget
 description: A simple bouncing widget.
-version: 1.0.2
+version: 1.0.3
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
