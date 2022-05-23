@@ -61,9 +61,6 @@ class _BouncyDemoState extends State<BouncyDemo> {
               // Without it, the icon will be clipped.
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Bouncy(
-                  // height and width match the default icon size
-                  height: 24,
-                  width: 24,
                   // the bounce animation takes 2 seconds total
                   duration: Duration(seconds: 2),
                   // go up by 10 before dropping

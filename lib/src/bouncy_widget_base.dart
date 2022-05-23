@@ -2,12 +2,6 @@ import 'package:flutter/widgets.dart';
 
 /// A Widget which makes its child bounce up and down.
 class Bouncy extends StatefulWidget {
-  /// height of the bouncy container, defaults to 0
-  double height;
-
-  /// width of the bouncy container, defaults to 0
-  double width;
-
   /// total duration of the bounce cycle, including pause
   Duration duration;
 
@@ -24,9 +18,7 @@ class Bouncy extends StatefulWidget {
   Widget child;
 
   Bouncy(
-      {this.height = 0,
-      this.width = 0,
-      this.duration = const Duration(seconds: 1),
+      {this.duration = const Duration(seconds: 1),
       required this.lift,
       this.pause = 0,
       this.ratio = 0.25,
@@ -55,16 +47,12 @@ class _BouncyState extends State<Bouncy> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: widget.height,
-      width: widget.width,
-      child: _BouncyAnimation(
-          controller: _controller,
-          lift: widget.lift,
-          pause: widget.pause,
-          ratio: widget.ratio,
-          child: widget.child),
-    );
+    return _BouncyAnimation(
+        controller: _controller,
+        lift: widget.lift,
+        pause: widget.pause,
+        ratio: widget.ratio,
+        child: widget.child);
   }
 }
 
@@ -104,11 +92,9 @@ class _BouncyAnimation extends StatelessWidget {
         (controller.value < (1 - pause))) {
       phase = downPhase;
     }
-    return Stack(clipBehavior: Clip.none, children: [
-      SizedBox(),
-      Positioned(bottom: phase.value, child: child ?? const SizedBox())
-    ]);
-    //Padding(padding: EdgeInsets.only(bottom: phase.value), child: child);
+    return Transform(
+        transform: Matrix4.translationValues(0, -1 * phase.value, 0),
+        child: child ?? SizedBox());
   }
 
   @override
