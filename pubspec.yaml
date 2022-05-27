@@ -1,6 +1,6 @@
 name: bouncy_widget
 description: A simple bouncing widget.
-version: 2.0.0
+version: 2.0.1
 repository:
   https://github.com/sshipman/bouncy_widget
 environment:
