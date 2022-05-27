@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Correct email address in LICENSE
+- 
 ## 2.0.0
 
 - Move from Stack/Positioned implementation to Transform.
